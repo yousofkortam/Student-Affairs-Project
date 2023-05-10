@@ -35,7 +35,11 @@ class adminController extends Controller
             ], 422);
         }
     
-        $department = Department::create($validatedData);
+        $department = new Department();
+        $department->department_code = $request->input('department_code');
+        $department->department_name = $request->input('department_name');
+
+        $department->save();
     
         return response()->json([
             'message' => 'Department created successfully',
