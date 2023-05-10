@@ -14,16 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', function () {
-    return "Admin";
+
+Route::prefix('admin')->group(function () {
+    Route::controller(adminController::class)->group(function () {
+        Route::post('/add-dept', 'addDepartment');
+
+        Route::post('/add-new-student', 'addStudent');
+
+        Route::post('/add-new-doctor', 'addDoctor');
+
+        Route::post('add-new-role', 'addRole');
+
+        Route::post('/add-new-course', 'addCourse');
+    });
 });
-
-Route::post('/add-dept', [adminController::class, 'addDepartment']);
-
-Route::post('/add-new-student', [adminController::class, 'addStudent']);
-
-Route::post('/add-new-doctor', [adminController::class, 'addDoctor']);
-
-Route::post('/add-new-role', [adminController::class, 'addRole']);
-
-Route::post('/add-new-course', [adminController::class, 'addCourse']);

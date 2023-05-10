@@ -22,10 +22,17 @@ class adminController extends Controller
      */
     public function addDepartment(Request $request)
     {
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(), [
             'department_name' => 'required|string|max:255',
             'department_code' => 'required|string|max:10|unique:departments',
         ]);
+
+        if ($validatedData->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validatedData->errors(),
+            ], 422);
+        }
     
         $department = Department::create($validatedData);
     
@@ -67,9 +74,16 @@ class adminController extends Controller
 
     public function addRole(Request $request)
     {
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(), [
             'role_name' => 'required|string|max:255|unique:roles',
         ]);
+
+        if ($validatedData->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validatedData->errors(),
+            ], 422);
+        }
 
         $role = new Role();
         $role->role_name = $validatedData['role_name'];
