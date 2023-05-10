@@ -5,6 +5,7 @@ namespace App\Http\Controllers\adminController;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Department;
+use App\Models\Prerequisite;
 use App\Models\Professor;
 use App\Models\Role;
 use App\Models\Student;
@@ -47,8 +48,10 @@ class adminController extends Controller
         $validatedData = Validator::make($request->all(), [
             'course_code' => 'required|string|max:255|unique:courses',
             'course_name' => 'required|string|max:255',
-            'department_id' => 'required',
-            'professor_id' => 'required|int',
+            'department_id' => 'required|exists:departments,id',
+            'professor_id' => 'required|int|exists:professors,id',
+            'prerequisites' => 'array',
+            'prerequisites.*' => 'exists:courses,id',
         ]);
 
         if ($validatedData->fails()) {
@@ -66,9 +69,20 @@ class adminController extends Controller
 
         $course->save();
 
+        if (count($request->input('prerequisites')) > 0) {
+            foreach ($request->input('prerequisites') as $pre_course_id) {
+                $prerequistite = new Prerequisite();
+                $prerequistite->course_id = $course->id;
+                $prerequistite->prerequisite_id = $pre_course_id;
+
+                $prerequistite->save();
+            }
+        }
+
         return response()->json([
             'message' => 'Course added successfully',
             'course' => $course,
+            'prerequiesties' => $course->prerequisites,
         ], 201);
     }
 
@@ -86,7 +100,7 @@ class adminController extends Controller
         }
 
         $role = new Role();
-        $role->role_name = $validatedData['role_name'];
+        $role->role_name = $request->input('role_name');
 
         $role->save();
 
