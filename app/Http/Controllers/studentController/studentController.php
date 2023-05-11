@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class studentController extends Controller
 {
-    //
+    public function __construct() 
+    {
+        $this->middleware('admin');
+    }
 }

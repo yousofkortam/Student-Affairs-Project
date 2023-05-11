@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Validator;
 
 class adminController extends Controller
 {
-     /**
-     * Store a newly created department in the database.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+       $this->middleware('admin');
+    }
+     
     public function addDepartment(Request $request)
     {
         $validatedData = Validator::make($request->all(), [
@@ -196,5 +196,47 @@ class adminController extends Controller
             'student' => $doctor,
         ], 201);
     }
-}
 
+    public function addAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+            'phone_number' => 'required|string|min:10',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $admin = User::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'phone_number' => $request->input('phone_number'),
+            'role_id' => 3
+        ]);
+
+        return response()->json([
+            'message' => 'Admin created successfully',
+            'student' => $admin,
+        ], 201);
+    }
+
+    public function getCourses()
+    {
+        $courses = Course::all();
+        return response()->json([
+            'message' => 'Done',
+            'courses' => $courses
+        ], 201);
+    }
+}

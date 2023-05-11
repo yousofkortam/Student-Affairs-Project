@@ -13,13 +13,22 @@ class systemController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return response()->json([
-                'message' => 'Login successful'
-            ]);
+            if (Auth()->user()->role->role_name == "Admin") {
+                return redirect('/dashboard');
+            }
         }
 
         return response()->json([
             'message' => 'Invalid email or password',
         ], 401);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return response()->json(['message' => 'Logged out successfully']);
     }
 }

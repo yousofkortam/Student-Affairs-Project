@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pagesController\pagesController;
 use App\Http\Controllers\systemController\systemController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/login', [systemController::class, 'login']);
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/login', [pagesController::class, 'loginPage']);
+Route::post('/login', [systemController::class, 'login'])->name('login');
+Route::get('/logout', [systemController::class, 'logout']);
+Route::get('/pre/{id}', [systemController::class, 'getPre']);

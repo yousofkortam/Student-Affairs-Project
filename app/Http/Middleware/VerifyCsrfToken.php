@@ -17,6 +17,10 @@ class VerifyCsrfToken extends Middleware
         '/admin/login',
         '/admin/add-new-role',
         '/admin/add-new-doctor',
-        '/admin/add-new-course'
+        '/admin/add-new-course',
+        '/admin/add-new-admin',
+        '/login',
+        '/logout',
+        '/pre',
     ];
 }
