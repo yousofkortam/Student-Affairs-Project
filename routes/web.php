@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\pagesController\pagesController;
 use App\Http\Controllers\systemController\systemController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,14 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main');
 });
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+Route::get('/login', function () {
+    return view('login');
 });
 
-Route::get('/login', [pagesController::class, 'loginPage']);
-Route::post('/login', [systemController::class, 'login'])->name('login');
-Route::get('/logout', [systemController::class, 'logout']);
-Route::get('/pre/{id}', [systemController::class, 'getPre']);
+
+
+Route::post('/login', [systemController::class, 'login']);
