@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Validator;
 
 class adminController extends Controller
 {
-     /**
-     * Store a newly created department in the database.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
+
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+    
     public function addDepartment(Request $request)
     {
         $validatedData = Validator::make($request->all(), [

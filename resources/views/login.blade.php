@@ -22,53 +22,96 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
 
+    <style>
 
+        * {
+            background: white;
+        }
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: white;
+        }
+        .h-custom {
+            height: calc(100% - 73px);
+        }
+        @media (max-width: 450px) {
+            .h-custom {
+                height: 100%;
+            }
+        }
+    </style>
 
 
 </head>
 
 <body class="bg-dark">
 
-    <div class="sufee-login d-flex align-content-center flex-wrap">
-        <div class="container">
-            <div class="login-content">
-                <div class="login-logo">
-                    <a href="index.html">
-                        LOGIN
-                    </a>
-                </div>
-                <div class="login-form">
-                    <form id="loginForm" method="post" action="{{url('/login')}}">
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input type="email" name="email" class="form-control" placeholder="Email" required>
-                        </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Password" required>
-                        </div>
-                                <div class="checkbox">
-                                    <label>
-                                <input type="checkbox"> Remember Me
-                            </label>
-                                    <label class="pull-right">
-                                <a href="#">Forgotten Password?</a>
-                            </label>
-
-                                </div>
-                                <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
-                    </form>
-                </div>
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                class="img-fluid" alt="Sample image">
             </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+              <form method="POST" action="{{Route('login')}}">
+                <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                  <p class="lead fw-normal mb-0 me-3">LOGIN</p>
+                  
+                </div>
+      
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="email">Email address</label>
+                  <input type="email" name="email" id="email" class="form-control form-control-lg"
+                    placeholder="Enter a valid email address" required />
+                </div>
+      
+                <!-- Password input -->
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="form3Example4">Password</label>
+                  <input type="password" name="password" id="form3Example4" class="form-control form-control-lg"
+                    placeholder="Enter password" required />
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="form3Example4">Role</label>
+                  <select class="form-select" name="role_id" aria-label="Default select example">
+                    <option value="3">Admin</option>
+                    <option value="2">Professor</option>
+                    <option value="1">Student</option>
+                  </select>
+                </div>
+      
+                <div class="d-flex justify-content-between align-items-center">
+                  <!-- Checkbox -->
+                  <div class="form-check mb-0">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                    <label class="form-check-label" for="form2Example3">
+                      Remember me
+                    </label>
+                  </div>
+                  <a href="#!" class="text-body">Forgot password?</a>
+                </div>
+      
+                <div class="text-center text-lg-start mt-4 pt-2">
+                  <button type="submit" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                  <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+                      class="link-primary" style="color: blue">Register</a></p>
+                </div>
+      
+              </form>
+            </div>
+          </div>
         </div>
-    </div>
+      </section>
 
 
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 
