@@ -14,10 +14,10 @@
             <img src="{{ Vite::asset('resources/imgs/avatar.jpg') }}" >
         </div>
         <div class="user-info">
-          <span class="user-name">{{ Auth()->user()->first_name }}
-            <strong>{{ Auth()->user()->last_name }}</strong>
+          <span class="user-name">A7med
+            <strong>3del</strong>
           </span>
-          <span class="user-role"> {{Auth()->user()->role->role_name }} </span>
+          <span class="user-role" style="font-size: 25px"> سالك </span>
         </div>
       </div>
       <!-- sidebar-header  -->
