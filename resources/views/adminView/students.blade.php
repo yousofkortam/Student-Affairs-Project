@@ -1,6 +1,10 @@
 @extends('layouts.adminLayout')
 
 @section('content')
+
+<div class="col-sm-7">
+    <a href="/admin/add-student">Add Student</a>
+</div>
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
@@ -16,8 +20,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Position</th>
-                                    <th>Office</th>
-                                    <th></th>
+                                    <th>Phone</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,10 +29,6 @@
                                         <td> {{ $student->first_name }} {{ $student->last_name }} </td>
                                         <td> {{ $student->email }} </td>
                                         <td> {{ $student->phone_number }} </td>
-                                        <td>
-                                            <a href="" class="text text-info">Edit</a> |
-                                            <a href="/admin/delete-student/{{$student->id}}" class="text text-danger" onclick="return confirm('Are you sure to delete {{ $student->first_name }} {{ $student->last_name }}')"> Delete</a>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

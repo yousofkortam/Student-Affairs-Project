@@ -43,10 +43,12 @@ class adminController extends Controller
 
         $department->save();
     
-        return response()->json([
-            'message' => 'Department created successfully',
-            'department' => $department,
-        ], 201);
+        // return response()->json([
+        //     'message' => 'Department created successfully',
+        //     'department' => $department,
+        // ], 201);
+
+        return redirect('/admin/departments');
     }
 
     public function addCourse(Request $request)
@@ -85,11 +87,13 @@ class adminController extends Controller
             }
         }
 
-        return response()->json([
-            'message' => 'Course added successfully',
-            'course' => $course,
-            'prerequiesties' => $course->prerequisites,
-        ], 201);
+        // return response()->json([
+        //     'message' => 'Course added successfully',
+        //     'course' => $course,
+        //     'prerequiesties' => $course->prerequisites,
+        // ], 201);
+
+        return redirect('/admin/courses');
     }
 
     public function addRole(Request $request)
@@ -127,12 +131,12 @@ class adminController extends Controller
             'phone_number' => 'required|string|min:10',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation error',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'message' => 'Validation error',
+        //         'errors' => $validator->errors(),
+        //     ], 422);
+        // }
 
         $student = User::create([
             'first_name' => $request->input('first_name'),
@@ -151,10 +155,12 @@ class adminController extends Controller
 
         $st->save();
 
-        return response()->json([
-            'message' => 'Student created successfully',
-            'student' => $student,
-        ], 201);
+        // return response()->json([
+        //     'message' => 'Student created successfully',
+        //     'student' => $student,
+        // ], 201);
+
+        return redirect('/admin/students');
     }
 
     public function deleteStudent($id)
@@ -184,12 +190,12 @@ class adminController extends Controller
             'department_id' => 'required|int'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation error',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'message' => 'Validation error',
+        //         'errors' => $validator->errors(),
+        //     ], 422);
+        // }
 
         $doctor = User::create([
             'first_name' => $request->input('first_name'),
@@ -208,10 +214,12 @@ class adminController extends Controller
 
         $doc->save();
 
-        return response()->json([
-            'message' => 'Doctor created successfully',
-            'student' => $doctor,
-        ], 201);
+        // return response()->json([
+        //     'message' => 'Doctor created successfully',
+        //     'student' => $doctor,
+        // ], 201);
+
+        return redirect('/admin/professors');
     }
 }
 

@@ -1,6 +1,9 @@
 @extends('layouts.adminLayout')
 
 @section('content')
+<div class="col-sm-7">
+    <a href="/admin/add-course">Add Course</a>
+</div>
 <div class="content mt-3">
 
 

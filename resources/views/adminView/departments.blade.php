@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="col-sm-7">
-    <a href="/admin/add-admin">Add Administrator</a>
+    <a href="/admin/add-department">Add Department</a>
 </div>
 <div class="content mt-3">
     <div class="animated fadeIn">
@@ -17,18 +17,18 @@
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
+                                    <th>Code</th>
                                 </tr>
                             </thead>
                             <tbody>
                                
-                                @foreach ($admins as $admin)
+                                @foreach ($departments as $dept)
                                     <tr>
-                                        <td> {{ $admin->first_name }} {{ $admin->last_name }} </td>
-                                        <td> {{ $admin->email }} </td>
-                                        <td> {{ $admin->phone_number }} </td>
+                                        <td> {{ $dept->id }}</td>
+                                        <td> {{ $dept->department_name }} </td>
+                                        <td> {{ $dept->department_code }} </td>
                                     </tr>
                                 @endforeach
                                 

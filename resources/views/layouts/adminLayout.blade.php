@@ -17,6 +17,14 @@
     <link rel="stylesheet" href="/vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="/vendors/selectFX/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="/vendors/jqvmap/dist/jqvmap.min.css">
+    <link rel="stylesheet" href="/style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css"
+        integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -34,34 +42,42 @@
         <nav class="navbar navbar-expand-sm navbar-default">
 
             <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="{{url('/')}}">FCI Admin</a>
+                <a class="navbar-brand" href="{{ url('/') }}">FCI Admin</a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="{{url('/admin/dashboard')}}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="{{ url('/admin/dashboard') }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
 
                     <li class="active">
-                        <a href="{{url('/admin/courses')}}"> <i class="menu-icon fa fa-dashboard"></i>Courses </a>
+                        <a href="{{ url('/admin/courses') }}"> <i class="menu-icon fa fa-dashboard"></i>Courses </a>
                     </li>
 
                     <li class="active">
-                        <a href="{{url('/admin/adminstrators')}}"> <i class="menu-icon fa fa-dashboard"></i>Administrators </a>
+                        <a href="{{ url('/admin/adminstrators') }}"> <i
+                                class="menu-icon fa fa-dashboard"></i>Administrators </a>
                     </li>
 
                     <li class="active">
-                        <a href="{{url('/admin/professors')}}"> <i class="menu-icon fa fa-dashboard"></i>Professors </a>
+                        <a href="{{ url('/admin/professors') }}"> <i class="menu-icon fa fa-dashboard"></i>Professors
+                        </a>
                     </li>
 
                     <li class="active">
-                        <a href="{{url('/admin/students')}}"> <i class="menu-icon fa fa-dashboard"></i>Students </a>
+                        <a href="{{ url('/admin/students') }}"> <i class="menu-icon fa fa-dashboard"></i>Students </a>
                     </li>
-                    
+
+                    <li class="active">
+                        <a href="{{ url('/admin/departments') }}"> <i class="menu-icon fa fa-dashboard"></i>Departments
+                        </a>
+                    </li>
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -79,12 +95,13 @@
             <div class="header-menu">
 
                 <div class="col-sm-7">
-                    
+
                 </div>
 
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
                             <img class="user-avatar rounded-circle" src="/images/admin.jpg" alt="User Avatar">
                         </a>
 
@@ -100,7 +117,7 @@
         </header><!-- /header -->
         <!-- Header-->
 
-        
+
         @yield('content')
 
     </div><!-- /#right-panel -->
@@ -137,6 +154,10 @@
             });
         })(jQuery);
     </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
 

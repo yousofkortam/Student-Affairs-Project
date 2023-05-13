@@ -25,6 +25,12 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
             Route::get('/adminstrators', 'adminsPage');
             Route::get('/professors', 'professorsPage');
             Route::get('/students', 'studentsPage');
+            Route::get('/add-course', 'addCourse');
+            Route::get('/add-student', 'addStudent');
+            Route::get('/add-admin', 'addAdmin');
+            Route::get('/add-professor', 'addProf');
+            Route::get('/departments', 'departments');
+            Route::get('/add-department', 'addDept');
         });
     });
 
@@ -37,7 +43,7 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
     
             Route::post('/add-new-doctor', 'addDoctor');
     
-            Route::post('add-new-role', 'addRole');
+            Route::post('/add-new-role', 'addRole');
     
             Route::post('/add-new-course', 'addCourse');
 

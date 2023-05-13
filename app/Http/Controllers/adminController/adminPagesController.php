@@ -4,6 +4,7 @@ namespace App\Http\Controllers\adminController;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Department;
 use App\Models\Professor;
 use App\Models\Role;
 use App\Models\Student;
@@ -60,5 +61,44 @@ class adminPagesController extends Controller
             $query->where('role_name', 'Student');
         })->get();
         return View('adminView.students')->with('students', $students);
+    }
+
+    public function addCourse()
+    {
+        $departments = Department::all();
+        $professors = Professor::all();
+        $courses = Course::all();
+        return View('adminView.addCourse')->with('data', [
+            'depts' => $departments,
+            'profs' => $professors,
+            'courses' => $courses
+        ]);
+    }
+
+    public function addStudent()
+    {
+        return View('adminView.addStudent');
+    }
+
+    public function addAdmin()
+    {
+        return View('adminView.addAdmin');
+    }
+
+    public function addProf()
+    {
+        $depts = Department::all();
+        return View('adminView.addProf')->with('departments', $depts);
+    }
+
+    public function departments()
+    {
+        $depts = Department::all();
+        return View('adminView.departments')->with('departments', $depts);
+    }
+
+    public function addDept()
+    {
+        return View('adminView.addDept');
     }
 }
