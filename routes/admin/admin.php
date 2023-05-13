@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminController\adminController;
+use App\Http\Controllers\adminController\adminPagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['middleware' => 'admin'], function () {
+Route::group(['middleware' => 'auth', 'admin'], function () {
+
+    Route::prefix('admin')->group(function () {
+        Route::controller(adminPagesController::class)->group(function () {
+            Route::get('/dashboard', 'dashboard');
+            Route::get('/courses', 'coursesPage');
+            Route::get('/adminstrators', 'adminsPage');
+            Route::get('/professors', 'professorsPage');
+            Route::get('/students', 'studentsPage');
+        });
+    });
 
     Route::prefix('admin')->group(function () {
         Route::controller(adminController::class)->group(function () {
-            Route::get('/dashboard', 'dashboard');
     
             Route::post('/add-dept', 'addDepartment');
     
@@ -30,6 +40,8 @@ Route::group(['middleware' => 'admin'], function () {
             Route::post('add-new-role', 'addRole');
     
             Route::post('/add-new-course', 'addCourse');
+
+            Route::get('/delete-student/{id}', 'deleteStudent');
         });
     });
     

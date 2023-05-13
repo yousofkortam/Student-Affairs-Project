@@ -157,6 +157,21 @@ class adminController extends Controller
         ], 201);
     }
 
+    public function deleteStudent($id)
+    {
+
+        $user = User::find($id);
+        if ($user) {
+            $userId = $user->id;
+            $student = Student::find($userId);
+            if ($student) {
+                $student->delete();
+                $user->delete();
+            }
+        }
+        return redirect('/admin/students');
+    }
+
     public function addDoctor(Request $request)
     {
         $validator = Validator::make($request->all(), [

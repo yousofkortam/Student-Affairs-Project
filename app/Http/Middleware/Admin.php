@@ -16,11 +16,9 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth()->user()->role->role_name == "Admin") return $next($request);
-        return response()->json(
-            [
-                'message' => 'Unuthorized',
-            ]
-        );
+        if (Auth::check() && Auth()->user()->role->role_name === "Admin") {
+            return $next($request);
+        }
+        return redirect('/login');
     }
 }

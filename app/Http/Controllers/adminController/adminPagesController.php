@@ -5,7 +5,9 @@ namespace App\Http\Controllers\adminController;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Professor;
+use App\Models\Role;
 use App\Models\Student;
+use App\Models\User;
 
 class adminPagesController extends Controller
 {
@@ -18,38 +20,45 @@ class adminPagesController extends Controller
     public function dashboard()
     {
         $courses = Course::all();
-        $students = Student::all();
         $professors = Professor::all();
+        $students = Student::all();
+        $roles = Role::all();
         $data = [
             'courses' => $courses,
+            'professors' => $professors,
             'students' => $students,
-            'professors' => $professors
+            'roles' => $roles
         ];
-        return View('main')->with('data', $data);
+        return View('adminView.dashboard')->with('data', $data);
     }
 
-    public function addCourse()
+    public function coursesPage()
     {
-        return View('admin.addCourse');
+        $courses = Course::all();
+        return View('adminView.courses')->with('courses', $courses);
     }
 
-    public function addProfessor()
+    public function adminsPage()
     {
-        return View('admin.addProfessor');
+        $admins = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Admin');
+        })->get();
+        return View('adminView.admins')->with('admins', $admins);
     }
 
-    public function addRole()
+    public function professorsPage()
     {
-        return View('admin.addRole');
+        $professors = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Doctor');
+        })->get();
+        return View('adminView.professors')->with('professors', $professors);
     }
 
-    public function addDepartment()
+    public function studentsPage()
     {
-        return View('admin.addDepartment');
-    }
-
-    public function addStudent()
-    {
-        return View('admin.addStudent');
+        $students = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'Student');
+        })->get();
+        return View('adminView.students')->with('students', $students);
     }
 }

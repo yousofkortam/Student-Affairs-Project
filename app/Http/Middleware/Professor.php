@@ -16,12 +16,9 @@ class Professor
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth()->user->role->role_name == "Doctor") {
+        if (Auth::check() && Auth()->user()->role->role_name === "Doctor") {
             return $next($request);
-        } 
-
-        return response()->json([
-            'message' => 'Unuthorized'
-        ]);
+        }
+        return redirect('/login');
     }
 }

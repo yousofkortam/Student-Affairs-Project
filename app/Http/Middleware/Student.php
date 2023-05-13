@@ -16,12 +16,9 @@ class Student
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth()->user->role->role_name == "Student") {
+        if (Auth::check() && Auth()->user()->role->role_name === "Student") {
             return $next($request);
-        } 
-
-        return response()->json([
-            'message' => 'Unuthorized'
-        ]);
+        }
+        return redirect('/login');
     }
 }

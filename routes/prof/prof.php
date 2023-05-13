@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/prof', function () {
     return "Professor";
-});
+})->middleware('professor');
