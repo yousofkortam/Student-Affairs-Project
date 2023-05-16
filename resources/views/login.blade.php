@@ -56,7 +56,14 @@
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                 class="img-fluid" alt="Sample image">
             </div>
+            
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+              
+              @if(isset($loginError))
+                  <div class="alert alert-danger">
+                      {{ $loginError }}
+                  </div>
+              @endif
               <form method="POST" action="{{Route('login')}}">
                 <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                   <p class="lead fw-normal mb-0 me-3">LOGIN</p>

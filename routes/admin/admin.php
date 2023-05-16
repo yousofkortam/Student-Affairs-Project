@@ -36,17 +36,11 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
 
     Route::prefix('admin')->group(function () {
         Route::controller(adminController::class)->group(function () {
-    
             Route::post('/add-dept', 'addDepartment');
-    
             Route::post('/add-new-student', 'addStudent');
-    
             Route::post('/add-new-doctor', 'addDoctor');
-    
             Route::post('/add-new-role', 'addRole');
-    
             Route::post('/add-new-course', 'addCourse');
-
             Route::get('/delete-student/{id}', 'deleteStudent');
         });
     });

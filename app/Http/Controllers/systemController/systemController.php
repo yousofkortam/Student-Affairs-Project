@@ -24,9 +24,9 @@ class systemController extends Controller
             }
         }
 
-        return response()->json([
-            'message' => 'Invalid email or password',
-        ], 401);
+        return View('login')->with([
+            'loginError' => 'incorrect email or password'
+        ]);
     }
 
     public function logout()
