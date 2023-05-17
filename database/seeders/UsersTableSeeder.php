@@ -5,9 +5,7 @@ namespace Database\Seeders;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -21,7 +19,7 @@ class UsersTableSeeder extends Seeder
         $users = [
             [
                 'username' => 'admin',
-                'password' => Hash::make('123456789'),
+                'password' => bcrypt('123456789'),
                 'first_name' => 'Yousof',
                 'last_name' => 'Kortam',
                 'email' => 'admin@gmail.com',
