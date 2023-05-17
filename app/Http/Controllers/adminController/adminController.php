@@ -131,12 +131,14 @@ class adminController extends Controller
             'phone_number' => 'required|string|min:10',
         ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'message' => 'Validation error',
-        //         'errors' => $validator->errors(),
-        //     ], 422);
-        // }
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $role = Role::where('role_name', 'Student')->first();
 
         $student = User::create([
             'first_name' => $request->input('first_name'),
@@ -145,7 +147,7 @@ class adminController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'phone_number' => $request->input('phone_number'),
-            'role_id' => 1
+            'role_id' => $role->id
         ]);
 
 
@@ -166,14 +168,13 @@ class adminController extends Controller
     public function deleteStudent($id)
     {
 
+        $student = Student::where('user_id', $id)->first();
+        if ($student) {
+            $student->delete();
+        }
         $user = User::find($id);
         if ($user) {
-            $userId = $user->id;
-            $student = Student::find($userId);
-            if ($student) {
-                $student->delete();
-                $user->delete();
-            }
+            $user->delete();
         }
         return redirect('/admin/students');
     }
@@ -190,12 +191,14 @@ class adminController extends Controller
             'department_id' => 'required|int'
         ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'message' => 'Validation error',
-        //         'errors' => $validator->errors(),
-        //     ], 422);
-        // }
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $role = Role::where('role_name', 'Doctor')->first();
 
         $doctor = User::create([
             'first_name' => $request->input('first_name'),
@@ -204,7 +207,7 @@ class adminController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'phone_number' => $request->input('phone_number'),
-            'role_id' => 2,
+            'role_id' => $role->id,
         ]);
 
         $doc = new Professor();
@@ -220,6 +223,44 @@ class adminController extends Controller
         // ], 201);
 
         return redirect('/admin/professors');
+    }
+
+    public function addAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+            'phone_number' => 'required|string|min:10',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $role = Role::where('role_name', 'Admin')->first();
+
+        $student = User::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'phone_number' => $request->input('phone_number'),
+            'role_id' => $role->id
+        ]);
+
+        // return response()->json([
+        //     'message' => 'Student created successfully',
+        //     'student' => $student,
+        // ], 201);
+
+        return redirect('/admin/students');
     }
 }
 
