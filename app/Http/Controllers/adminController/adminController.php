@@ -245,7 +245,7 @@ class adminController extends Controller
 
         $role = Role::where('role_name', 'Admin')->first();
 
-        $student = User::create([
+        $admin = User::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'username' => $request->input('username'),
