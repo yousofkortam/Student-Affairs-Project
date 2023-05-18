@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Validator;
 
 class adminController extends Controller
 {
-
-
-
     public function __construct()
     {
         $this->middleware('admin');
@@ -27,7 +24,7 @@ class adminController extends Controller
     public function activeCourses()
     {
         isCourseRegisterActive::where('id', 1)
-        ->update(['isActive' => 1]);
+            ->update(['isActive' => 1]);
         session()->put('courseActive', 1);
         return response()->json(['message' => 'Course registration is active now']);
     }
@@ -35,11 +32,11 @@ class adminController extends Controller
     public function deactiveCourses()
     {
         isCourseRegisterActive::where('id', 1)
-        ->update(['isActive' => 0]);
+            ->update(['isActive' => 0]);
         session()->put('courseActive', 0);
         return response()->json(['message' => 'Course registration is not active now']);
     }
-    
+
     public function addDepartment(Request $request)
     {
         $validatedData = Validator::make($request->all(), [
@@ -53,13 +50,13 @@ class adminController extends Controller
                 'errors' => $validatedData->errors(),
             ], 422);
         }
-    
+
         $department = new Department();
         $department->department_code = $request->input('department_code');
         $department->department_name = $request->input('department_name');
 
         $department->save();
-    
+
         // return response()->json([
         //     'message' => 'Department created successfully',
         //     'department' => $department,
@@ -75,7 +72,7 @@ class adminController extends Controller
             'course_name' => 'required|string|max:255',
             'department_id' => 'required|exists:departments,id',
             'professor_id' => 'required|int|exists:professors,id',
-            'prerequisites' => 'array',
+            'prerequisites' => 'nullable|array',
             'prerequisites.*' => 'exists:courses,id',
         ]);
 
@@ -94,13 +91,13 @@ class adminController extends Controller
 
         $course->save();
 
-        if (count($request->input('prerequisites')) > 0) {
+        if ($request->has('prerequisites') && is_array($request->input('prerequisites'))) {
             foreach ($request->input('prerequisites') as $pre_course_id) {
-                $prerequistite = new Prerequisite();
-                $prerequistite->course_id = $course->id;
-                $prerequistite->prerequisite_id = $pre_course_id;
+                $prerequisite = new Prerequisite();
+                $prerequisite->course_id = $course->id;
+                $prerequisite->prerequisite_id = $pre_course_id;
 
-                $prerequistite->save();
+                $prerequisite->save();
             }
         }
 
@@ -197,6 +194,49 @@ class adminController extends Controller
         return redirect('/admin/students');
     }
 
+    public function updateStudent(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Student not found'
+            ]);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|unique:users,username,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8',
+            'phone_number' => 'required|string|min:10',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'error' => $validator->errors()
+            ]);
+        }
+
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+        $user->phone_number = $request->input('phone_number');
+        $user->save();
+
+        return response()->json([
+            'message' => 'Student updated successfully',
+            'user' => $user
+        ]);
+    }
+
+
     public function addDoctor(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -239,6 +279,40 @@ class adminController extends Controller
         //     'message' => 'Doctor created successfully',
         //     'student' => $doctor,
         // ], 201);
+
+        return redirect('/admin/professors');
+    }
+
+    public function updateDoctor(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|min:5|max:255',
+            'last_name' => 'required|string|max:255',
+            'username' => 'required|unique:users,username,' . $id . '|min:3',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8',
+            'phone_number' => 'required|string|min:10',
+            'department_id' => 'required|int'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/admin/professor/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $userData = $validator->validated();
+        if ($request->has('password')) {
+            $userData['password'] = bcrypt($request->input('password'));
+        }
+
+        $user->update($userData);
+
+        $professor = Professor::where('user_id', $id)->first();
+        $professor->department_id = $userData['department_id'];
+        $professor->save();
 
         return redirect('/admin/professors');
     }
@@ -305,4 +379,3 @@ class adminController extends Controller
         return redirect('/admin/adminstrators');
     }
 }
-

@@ -1,47 +1,61 @@
 @extends('layouts.adminLayout')
 
 @section('content')
+    <div class="col-sm-7">
+        <a href="/admin/add-professor">Add Professor</a>
+    </div>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
 
-<div class="col-sm-7">
-    <a href="/admin/add-professor">Add Professor</a>
-</div>
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Data Table</strong>
+                        </div>
 
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Data Table</strong>
-                    </div>
-                    <div class="card-body">
-                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Phone</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($professors as $prof)
+                        <div class="card-body">
+                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                <thead>
                                     <tr>
-                                        <td>Dr.{{ $prof->first_name }}  {{ $prof->last_name }} </td>
-                                        <td> {{ $prof->email }} </td>
-                                        <td> {{ $prof->phone_number }} </td>
-                                        <td>
-                                            <a onclick="return confirm('Are you sure to delete Dr.{{ $prof->first_name }}  {{ $prof->last_name }}')" class="text text-danger" href="/admin/delete-professor/{{$prof->id}}">Delete</a>
-                                        </td>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Username</th>
+                                        <th>Phone number</th>
+                                        <td></td>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $c = 1;
+                                    ?>
+                                    @foreach ($professors as $prof)
+                                        <tr>
+                                            <td>{{ $c++ }}</td>
+                                            <td>Dr.{{ $prof->first_name }} {{ $prof->last_name }}</td>
+                                            <td>{{ $prof->email }}</td>
+                                            <td>{{ $prof->username }}</td>
+                                            <td>{{ $prof->phone_number }}</td>
+
+                                            <td>
+                                                <a class="text text-info"
+                                                    href="/admin/professor/{{ $prof->id }}/edit">Edit</a>
+                                                    |
+                                                <a onclick="return confirm('Are you sure to delete Dr.{{ $prof->first_name }}  {{ $prof->last_name }}')"
+                                                    class="text text-danger"
+                                                    href="/admin/delete-professor/{{ $prof->id }}">Delete</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-
-
-        </div>
-    </div><!-- .animated -->
-</div><!-- .content -->
+        </div><!-- .animated -->
+    </div><!-- .content -->
 @endsection

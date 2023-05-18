@@ -8,33 +8,33 @@
 
         <div class="flex">
             <label>
-                <input name="first_name" required="" type="text" class="input">
+                <input name="first_name" for="first_name" required="" type="text" class="input">
                 <span>First name</span>
             </label>
 
             <label>
-                <input name="last_name" required="" placeholder="" type="text" class="input">
+                <input name="last_name" for="last_name" required="" placeholder="" type="text" class="input">
                 <span>Last name</span>
             </label>
         </div>
 
         <label>
-            <input name="username" required="" type="text" placeholder="" class="input">
+            <input name="username" for="username" required="" type="text" placeholder="" class="input">
             <span>User name</span>
         </label>
 
         <label>
-            <input name="email" required="" placeholder="" type="email" class="input">
+            <input name="email" for="email" required="" placeholder="" type="email" class="input">
             <span>Email</span>
         </label>
 
         <label>
-            <input name="password" required="" type="password" placeholder="" class="input">
+            <input name="password" for="password" required="" type="password" placeholder="" class="input">
             <span>Password</span>
         </label>
 
         <label>
-            <input name="phone_number" required="" type="tel" placeholder="" class="input">
+            <input name="phone_number" for="phone_number" required="" type="tel" placeholder="" class="input">
             <span>Phone number</span>
         </label>
 

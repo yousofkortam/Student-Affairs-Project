@@ -20,6 +20,9 @@ class VerifyCsrfToken extends Middleware
         '/admin/add-new-course',
         '/admin/active-courses-register',
         '/admin/deactive-courses-register',
-        '/login'
+        '/student/canregister/{id}',
+        '/admin/student/{id}/edit',
+        '/admin/professor/{id}/edit',
+        '/login',
     ];
 }

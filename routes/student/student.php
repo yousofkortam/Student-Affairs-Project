@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\studentController\studentController;
 use App\Http\Controllers\studentController\studentPagesController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,13 @@ Route::group(['middleware' => 'auth', 'student'], function () {
             Route::get('/dashboard', 'dashboard');
         });
     });
+
+    Route::prefix('student')->group(function () {
+        Route::controller(studentController::class)->group(function () {
+            Route::get('/canregister/{id}', 'checkIfStudentCanRegisterThisCourse');
+        });
+    });
+
+    
     
 });

@@ -20,7 +20,6 @@
 
         </div>
     </div>
-    <!--/.col-->
 
     <div class="col-sm-6 col-lg-3">
         <div class="card text-white bg-flat-color-2">
@@ -38,7 +37,6 @@
             </div>
         </div>
     </div>
-    <!--/.col-->
 
     <div class="col-sm-6 col-lg-3">
         <div class="card text-white bg-flat-color-3">
@@ -56,7 +54,6 @@
             </div>
         </div>
     </div>
-    <!--/.col-->
 
     <div class="col-sm-6 col-lg-3">
         <div class="card text-white bg-flat-color-4">
@@ -74,85 +71,86 @@
             </div>
         </div>
     </div>
-    <!--/.col-->
 
-    <div class="col-lg-3 col-md-6">
-        <div class="social-box facebook">
-            <i class="fa fa-facebook"></i>
-            <ul>
-                <li>
-                    <span class="count">40</span> k
-                    <span>friends</span>
-                </li>
-                <li>
-                    <span class="count">450</span>
-                    <span>feeds</span>
-                </li>
-            </ul>
+    <a href="https://www.facebook.com/profile.php?id=100063596096736" target="_blank">
+        <div class="col-lg-3 col-md-6">
+            <div class="social-box facebook">
+                <i class="fa fa-facebook"></i>
+                <ul>
+                    <li>
+                        <span class="count">4.9</span> k
+                        <span>friends</span>
+                    </li>
+                    <li>
+                        <span class="count">450</span>
+                        <span>feeds</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <!--/social-box-->
-    </div>
-    <!--/.col-->
+    </a>
 
 
-    <div class="col-lg-3 col-md-6">
-        <div class="social-box twitter">
-            <i class="fa fa-twitter"></i>
-            <ul>
-                <li>
-                    <span class="count">30</span> k
-                    <span>friends</span>
-                </li>
-                <li>
-                    <span class="count">450</span>
-                    <span>tweets</span>
-                </li>
-            </ul>
+    <a href="">
+        <div class="col-lg-3 col-md-6">
+            <div class="social-box twitter">
+                <i class="fa fa-twitter"></i>
+                <ul>
+                    <li>
+                        <span class="count">30</span> k
+                        <span>friends</span>
+                    </li>
+                    <li>
+                        <span class="count">450</span>
+                        <span>tweets</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <!--/social-box-->
-    </div>
-    <!--/.col-->
+    </a>
 
-
-    <div class="col-lg-3 col-md-6">
-        <div class="social-box linkedin">
-            <i class="fa fa-linkedin"></i>
-            <ul>
-                <li>
-                    <span class="count">40</span> +
-                    <span>contacts</span>
-                </li>
-                <li>
-                    <span class="count">250</span>
-                    <span>feeds</span>
-                </li>
-            </ul>
+    <a href="">
+        <div class="col-lg-3 col-md-6">
+            <div class="social-box instagram">
+                <i class="fa fa-instagram"></i>
+                <ul>
+                    <li>
+                        <span class="count">10</span> k
+                        <span>friends</span>
+                    </li>
+                    <li>
+                        <span class="count">450</span>
+                        <span>tweets</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <!--/social-box-->
-    </div>
-    <!--/.col-->
+    </a>
 
 
-    <div class="col-lg-3 col-md-6">
-        <div class="social-box google-plus">
-            <i class="fa fa-google-plus"></i>
-            <ul>
-                <li>
-                    <span class="count">94</span> k
-                    <span>followers</span>
-                </li>
-                <li>
-                    <span class="count">92</span>
-                    <span>circles</span>
-                </li>
-            </ul>
+    <a href="">
+        <div class="col-lg-3 col-md-6">
+            <div class="social-box linkedin">
+                <i class="fa fa-linkedin"></i>
+                <ul>
+                    <li>
+                        <span class="count">40</span> +
+                        <span>contacts</span>
+                    </li>
+                    <li>
+                        <span class="count">250</span>
+                        <span>feeds</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <!--/social-box-->
-    </div>
-    <!--/.col-->
+    </a>
+
+
+    
 
     
 
 
-</div> <!-- .content -->
+</div>
 @endsection

@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
             Route::get('/add-professor', 'addProf');
             Route::get('/departments', 'departments');
             Route::get('/add-department', 'addDept');
+            Route::get('/student/{id}/edit', 'updateStudent');
+            Route::get('/professor/{id}/edit', 'updateDoctor');
         });
     });
 
@@ -47,7 +49,10 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
             Route::get('/delete-student/{id}', 'deleteStudent');
             Route::get('/delete-professor/{id}', 'deleteProf');
             Route::get('/delete-admin/{id}', 'deleteAdmin');
+            Route::post('/student/{id}/edit', 'updateStudent');
+            Route::post('/professor/{id}/edit', 'updateDoctor');
+
         });
     });
-    
+
 });

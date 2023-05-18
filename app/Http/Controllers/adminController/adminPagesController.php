@@ -9,6 +9,7 @@ use App\Models\Professor;
 use App\Models\Role;
 use App\Models\Student;
 use App\Models\User;
+use Illuminate\View\View;
 
 class adminPagesController extends Controller
 {
@@ -17,7 +18,7 @@ class adminPagesController extends Controller
     {
         $this->middleware('admin');
     }
-    
+
     public function dashboard()
     {
         $courses = Course::all();
@@ -94,6 +95,16 @@ class adminPagesController extends Controller
         return View('adminView.addProf')->with('departments', $depts);
     }
 
+    public function updateDoctor($id)
+    {
+        $user = User::find($id);
+        $departments = Department::all();
+        return View('adminView.updateProfessor')->with([
+            'user' => $user,
+            'departments' => $departments,
+        ]);
+    }
+
     public function departments()
     {
         $depts = Department::all();
@@ -103,5 +114,14 @@ class adminPagesController extends Controller
     public function addDept()
     {
         return View('adminView.addDept');
+    }
+
+
+    public function updateStudent($id)
+    {
+        $user = User::findOrFail($id);
+        return View('adminView.updateStudent')->with([
+            'user' => $user
+        ]);
     }
 }

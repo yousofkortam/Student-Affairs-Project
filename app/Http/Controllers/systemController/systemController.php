@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\systemController;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
+use App\Models\Degree;
 use App\Models\isCourseRegisterActive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +42,19 @@ class systemController extends Controller
             'message' => 'Incorrect email or password'
         ],
          401);
+    }
+
+    public function details($courseId)
+    {
+        $course = Course::find($courseId);
+        $pre = $course->prerequisites;
+        $degree = Degree::where('student_id', Auth::user()->id)->where('course_id', $courseId)->get();
+        return response()->json([
+            'user_id' => Auth::user()->id,
+            'course' => $course,
+            'pre' => $pre,
+            'degree' => $degree
+        ]);
     }
 
     public function logout()
