@@ -18,6 +18,8 @@ class VerifyCsrfToken extends Middleware
         '/admin/add-new-role',
         '/admin/add-new-doctor',
         '/admin/add-new-course',
+        '/admin/active-courses-register',
+        '/admin/deactive-courses-register',
         '/login'
     ];
 }

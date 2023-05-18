@@ -29,6 +29,9 @@
                                         <td> {{ $student->first_name }} {{ $student->last_name }} </td>
                                         <td> {{ $student->email }} </td>
                                         <td> {{ $student->phone_number }} </td>
+                                        <td>
+                                            <a onclick="return confirm('Are you sure to delete {{ $student->first_name }} {{ $student->last_name }}')" class="text text-danger" href="/admin/delete-student/{{ $student->id }}">Delete</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

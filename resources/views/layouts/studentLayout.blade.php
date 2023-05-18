@@ -23,6 +23,8 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+    @yield('styles')
+
 </head>
 
 <body>
@@ -50,7 +52,9 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-
+                            @if (session()->get('courseActive') == 1)
+                                <a class="nav-link" href=""><i class="fa fa-power-off"></i> Course Register</a>
+                            @endif
                             <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
@@ -80,6 +84,7 @@
     <script src="/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    @yield('scripts')
     <script>
         (function($) {
             "use strict";

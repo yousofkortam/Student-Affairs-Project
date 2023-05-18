@@ -56,25 +56,29 @@
                     </li>
 
                     <li class="active">
-                        <a href="{{ url('/admin/courses') }}"> <i class="menu-icon fa fa-dashboard"></i>Courses </a>
-                    </li>
-
-                    <li class="active">
-                        <a href="{{ url('/admin/adminstrators') }}"> <i
-                                class="menu-icon fa fa-dashboard"></i>Administrators </a>
-                    </li>
-
-                    <li class="active">
-                        <a href="{{ url('/admin/professors') }}"> <i class="menu-icon fa fa-dashboard"></i>Professors
+                        <a href="{{ url('/admin/courses') }}">
+                            <i class="menu-icon fa fa-book"></i>
+                            Courses
                         </a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url('/admin/students') }}"> <i class="menu-icon fa fa-dashboard"></i>Students </a>
+                        <a href="{{ url('/admin/adminstrators') }}"> <i class="menu-icon fa fa-cogs"></i>Administrators
+                        </a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url('/admin/departments') }}"> <i class="menu-icon fa fa-dashboard"></i>Departments
+                        <a href="{{ url('/admin/professors') }}"> <i class="menu-icon fa fa-user-md"></i>Professors
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <a href="{{ url('/admin/students') }}"> <i class="menu-icon fa fa-graduation-cap"></i>Students
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <a href="{{ url('/admin/departments') }}"> <i class="menu-icon fa fa-building"></i>Departments
                         </a>
                     </li>
 
@@ -95,7 +99,11 @@
             <div class="header-menu">
 
                 <div class="col-sm-7">
-
+                    @if (session()->get('courseActive') == 0)
+                        <a id="ActiveButtton" type="submit">active registration</a>
+                    @else
+                        <a id="DeactiveButtton" type="submit">deactive registration</a>
+                    @endif
                 </div>
 
                 <div class="col-sm-5">
@@ -136,6 +144,7 @@
     <script src="/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    @yield('scripts')
     <script>
         (function($) {
             "use strict";
@@ -155,9 +164,60 @@
         })(jQuery);
     </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"
+        integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#ActiveButtton').click(function() {
+                var id = 1;
+
+                $.ajax({
+                    url: '/admin/active-courses-register',
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        // Show a pop-up message with the response
+                        alert(response.message);
+                    },
+                    error: function(xhr) {
+                        // Show a pop-up message with the error
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+
+            $('#DeactiveButtton').click(function() {
+                var id = 1;
+
+                $.ajax({
+                    url: '/admin/deactive-courses-register',
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function(response) {
+                        // Show a pop-up message with the response
+                        alert(response.message);
+                    },
+                    error: function(xhr) {
+                        // Show a pop-up message with the error
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+
 
 </body>
 

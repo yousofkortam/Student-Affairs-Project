@@ -29,6 +29,9 @@
                                         <td>Dr.{{ $prof->first_name }}  {{ $prof->last_name }} </td>
                                         <td> {{ $prof->email }} </td>
                                         <td> {{ $prof->phone_number }} </td>
+                                        <td>
+                                            <a onclick="return confirm('Are you sure to delete Dr.{{ $prof->first_name }}  {{ $prof->last_name }}')" class="text text-danger" href="/admin/delete-professor/{{$prof->id}}">Delete</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

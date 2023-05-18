@@ -14,4 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/student/dashboard', [studentPagesController::class, 'dashboard']);
+
+
+
+Route::group(['middleware' => 'auth', 'student'], function () {
+
+    Route::prefix('student')->group(function () {
+        Route::controller(studentPagesController::class)->group(function () {
+            Route::get('/dashboard', 'dashboard');
+        });
+    });
+    
+});

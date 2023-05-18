@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 class studentPagesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('student');
+    }
+
     public function dashboard()
     {
         $courses = Auth::user()->student->courses;

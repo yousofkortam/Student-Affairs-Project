@@ -38,10 +38,15 @@ Route::group(['middleware' => 'auth', 'admin'], function () {
         Route::controller(adminController::class)->group(function () {
             Route::post('/add-dept', 'addDepartment');
             Route::post('/add-new-student', 'addStudent');
+            Route::post('/add-new-admin', 'addAdmin');
             Route::post('/add-new-doctor', 'addDoctor');
             Route::post('/add-new-role', 'addRole');
             Route::post('/add-new-course', 'addCourse');
+            Route::post('/active-courses-register', 'activeCourses');
+            Route::post('/deactive-courses-register', 'activeCourses');
             Route::get('/delete-student/{id}', 'deleteStudent');
+            Route::get('/delete-professor/{id}', 'deleteProf');
+            Route::get('/delete-admin/{id}', 'deleteAdmin');
         });
     });
     

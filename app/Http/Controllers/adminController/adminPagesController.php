@@ -59,7 +59,10 @@ class adminPagesController extends Controller
     {
         $students = User::whereHas('role', function ($query) {
             $query->where('role_name', 'Student');
-        })->get();
+        })
+        ->orderBy('first_name')
+        ->orderBy('last_name')
+        ->get();
         return View('adminView.students')->with('students', $students);
     }
 

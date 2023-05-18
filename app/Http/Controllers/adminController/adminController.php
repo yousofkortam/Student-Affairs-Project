@@ -5,6 +5,7 @@ namespace App\Http\Controllers\adminController;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Department;
+use App\Models\isCourseRegisterActive;
 use App\Models\Prerequisite;
 use App\Models\Professor;
 use App\Models\Role;
@@ -21,6 +22,22 @@ class adminController extends Controller
     public function __construct()
     {
         $this->middleware('admin');
+    }
+
+    public function activeCourses()
+    {
+        isCourseRegisterActive::where('id', 1)
+        ->update(['isActive' => 1]);
+        session()->put('courseActive', 1);
+        return response()->json(['message' => 'Course registration is active now']);
+    }
+
+    public function deactiveCourses()
+    {
+        isCourseRegisterActive::where('id', 1)
+        ->update(['isActive' => 0]);
+        session()->put('courseActive', 0);
+        return response()->json(['message' => 'Course registration is not active now']);
     }
     
     public function addDepartment(Request $request)
@@ -160,6 +177,7 @@ class adminController extends Controller
         // return response()->json([
         //     'message' => 'Student created successfully',
         //     'student' => $student,
+        //     'redirect' => '/admin/students'
         // ], 201);
 
         return redirect('/admin/students');
@@ -225,6 +243,20 @@ class adminController extends Controller
         return redirect('/admin/professors');
     }
 
+    public function deleteProf($id)
+    {
+
+        $prof = Professor::where('user_id', $id)->first();
+        if ($prof) {
+            $prof->delete();
+        }
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+        }
+        return redirect('/admin/professors');
+    }
+
     public function addAdmin(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -260,7 +292,17 @@ class adminController extends Controller
         //     'student' => $student,
         // ], 201);
 
-        return redirect('/admin/students');
+        return redirect('/admin/adminstrators');
+    }
+
+    public function deleteAdmin($id)
+    {
+
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+        }
+        return redirect('/admin/adminstrators');
     }
 }
 
