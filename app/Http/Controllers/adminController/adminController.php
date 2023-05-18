@@ -230,10 +230,11 @@ class adminController extends Controller
         $user->phone_number = $request->input('phone_number');
         $user->save();
 
-        return response()->json([
-            'message' => 'Student updated successfully',
-            'user' => $user
-        ]);
+        // return response()->json([
+        //     'message' => 'Student updated successfully',
+        //     'user' => $user
+        // ]);
+        return redirect('/admin/students');
     }
 
 
