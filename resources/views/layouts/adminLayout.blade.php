@@ -108,18 +108,17 @@
 
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="user-avatar rounded-circle" src="/images/admin.jpg" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
-
                             <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
                 </div>
+
             </div>
 
         </header><!-- /header -->
@@ -153,7 +152,11 @@
 
     <script src="/vendors/jquery/dist/jquery.min.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <script src="/assets/js/dashboard.js"></script>
+    <script src="/assets/js/widgets.js"></script>
 
     <script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
