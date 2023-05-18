@@ -14,26 +14,25 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $role = Role::where('role_name', 'Admin')->first();
+        $adminRole = Role::create([
+            'role_name' => 'Admin',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
 
-        $users = [
-            [
-                'username' => 'admin',
-                'password' => bcrypt('123456789'),
-                'first_name' => 'Yousof',
-                'last_name' => 'Kortam',
-                'email' => 'admin@gmail.com',
-                'phone_number' => '01023697225',
-                'address' => 'Shebien Elkowm, Menofia',
-                'date_of_birth' => Carbon::now(),
-                'role_id' => $role->id,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]
-        ];
-
-        foreach ($users as $userData) {
-            User::create($userData);
-        }
+        // Create the admin user
+        User::create([
+            'username' => 'admin',
+            'password' => bcrypt('password'),
+            'first_name' => 'Admin',
+            'last_name' => 'User',
+            'email' => 'admin@example.com',
+            'phone_number' => '123456789',
+            'address' => 'Admin Address',
+            'date_of_birth' => Carbon::now(),
+            'role_id' => $adminRole->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }
