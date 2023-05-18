@@ -47,13 +47,6 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ],
-        "init_php_project": [
-            "composer install",
-            "npm install",
-            "npm run build",
-            "php artisan migrate",
-            "php artisan db:seed"
         ]
     },
     "extra": {
