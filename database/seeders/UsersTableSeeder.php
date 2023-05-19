@@ -20,6 +20,18 @@ class UsersTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
         ]);
 
+        $doctorRole = Role::create([
+            'role_name' => 'Doctor',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        $studentRole = Role::create([
+            'role_name' => 'Student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
         // Create the admin user
         User::create([
             'username' => 'admin',
