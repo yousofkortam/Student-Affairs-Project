@@ -35,10 +35,10 @@ class UsersTableSeeder extends Seeder
         // Create the admin user
         User::create([
             'username' => 'admin',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('123456789'),
             'first_name' => 'Admin',
             'last_name' => 'User',
-            'email' => 'admin@example.com',
+            'email' => 'admin@gmail.com',
             'phone_number' => '123456789',
             'address' => 'Admin Address',
             'date_of_birth' => Carbon::now(),
