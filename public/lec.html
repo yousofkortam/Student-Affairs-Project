@@ -1,0 +1,84 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Embedded PDFs in Cards</title>
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 10px;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    }
+    .card-header {
+      padding: 10px;
+      background-color: #f5f5f5;
+      border-bottom: 1px solid #ccc;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    .card-body {
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      Card 1 Header
+    </div>
+    <div class="card-body">
+      <iframe src="path/to/my-pdf-1.pdf" width="100%" height="500px"></iframe>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Card 2 Header
+    </div>
+    <div class="card-body">
+      <object data="path/to/my-pdf-2.pdf" type="application/pdf" width="100%" height="500px">
+        <p>Alternative text - include a link to the PDF!</p>
+      </object>
+    </div>
+  </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses</title>
+  <link rel="stylesheet" href="lec.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+      <a href="kbs assignment.pdf" class="card-link" target="_blank">
+        <div class="card">
+          <div class="card-icon">
+            <i class="fas fa-file-pdf"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Course 1 Title</h5>
+            <p class="card-text">Course 1 Description</p>
+          </div>
+          <img src="m (1).png" alt="Course 1">
+        </div>
+      </a>
+  
+      <a href="course2-details.pdf" class="card-link" target="_blank">
+        <div class="card">
+          <div class="card-icon">
+            <i class="fas fa-file-pdf"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Course 2 Title</h5>
+            <p class="card-text">Course 2 Description</p>
+          </div>
+          <img src="m (2).png" alt="Course 2">
+        </div>
+      </a>
+    </div>
+  </body>
+</html>

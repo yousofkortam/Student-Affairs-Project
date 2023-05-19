@@ -23,12 +23,14 @@ Route::group(['middleware' => 'auth', 'student'], function () {
     Route::prefix('student')->group(function () {
         Route::controller(studentPagesController::class)->group(function () {
             Route::get('/dashboard', 'dashboard');
+            Route::get('/register', 'courseRegister');
         });
     });
 
     Route::prefix('student')->group(function () {
         Route::controller(studentController::class)->group(function () {
             Route::get('/canregister/{id}', 'checkIfStudentCanRegisterThisCourse');
+            Route::post('/register/{id}', 'courseReg');
         });
     });
 

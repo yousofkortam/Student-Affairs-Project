@@ -5,6 +5,7 @@ namespace App\Http\Controllers\studentController;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Degree;
+use App\Models\Enrollment;
 use Illuminate\Support\Facades\Auth;
 
 class studentController extends Controller
@@ -19,10 +20,7 @@ class studentController extends Controller
         $course = Course::with('prerequisites')->find($courseId);
 
         if (!$course) {
-            return response()->json([
-                'error' => 'Course not found',
-                'canRegister' => false
-            ]);
+            return false;
         }
 
         $prerequisiteIds = $course->prerequisites->pluck('id');
@@ -33,18 +31,19 @@ class studentController extends Controller
             ->count();
 
         if ($passedPrerequisites === $prerequisiteIds->count()) {
-            return response()->json([
-                'message' => 'Student can register for this course',
-                'canRegister' => true,
-                'course' => $course,
-                'prerequisites' => $course->prerequisites
-            ]);
+            return true;
         }
 
-        return response()->json([
-            'message' => 'Student cannot register for this course',
-            'canRegister' => false,
-            'prerequisites' => $course->prerequisites
-        ]);
+        return false;
     }
+
+    public function courseReg($id)
+    {
+        $enrollment = Enrollment::create([
+            'student_id' => Auth::user()->id,
+            'course_id' => $id,
+        ]);
+        return response()->json(['message' => 'Course registered successfully', 'enrollment' => $enrollment]);
+    }
+
 }

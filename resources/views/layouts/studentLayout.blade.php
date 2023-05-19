@@ -53,7 +53,7 @@
 
                         <div class="user-menu dropdown-menu">
                             @if (session()->get('courseActive') == 1)
-                                <a class="nav-link" href=""><i class="fa fa-power-off"></i> Course Register</a>
+                                <a class="nav-link" href="/student/register"><i class="fa fa-power-off"></i> Course Register</a>
                             @endif
                             <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
