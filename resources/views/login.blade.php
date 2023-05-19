@@ -98,9 +98,9 @@
                         <div class="form-outline mb-3">
                             <label class="form-label" for="form3Example4">Role</label>
                             <select class="form-select" name="role_id" aria-label="Default select example">
-                                <option value="3">Admin</option>
-                                <option value="2">Professor</option>
-                                <option value="1">Student</option>
+                                @foreach ($roles as $role) 
+                                    <option  value="{{ $role->id }}"> {{$role->role_name}} </option>
+                                @endforeach
                             </select>
                         </div>
 

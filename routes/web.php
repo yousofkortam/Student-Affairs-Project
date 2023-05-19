@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\systemController\systemController;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +40,10 @@ Route::get('/login', function () {
             return redirect('/student/dashboard');
         }
     }
-    return view('login');
+    $roles = Role::all();
+    return view('login')->with([
+        'roles' => $roles,
+    ]);
 });
 
 
