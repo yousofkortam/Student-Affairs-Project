@@ -1,5 +1,9 @@
 @extends('layouts.adminLayout')
 
+@section('page title')
+    Departments
+@endsection
+
 @section('content')
 <div class="col-sm-7">
     <a href="/admin/add-department">Add Department</a>

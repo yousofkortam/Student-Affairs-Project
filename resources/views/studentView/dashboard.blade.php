@@ -1,5 +1,9 @@
 @extends('layouts.studentLayout')
 
+@section('page title')
+    Student Dashboard
+@endsection
+
 @section('content')
 <div class="content mt-3">
 

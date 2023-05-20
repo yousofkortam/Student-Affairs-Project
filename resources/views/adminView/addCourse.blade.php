@@ -1,5 +1,9 @@
 @extends('layouts.adminLayout')
 
+@section('page title')
+    Add Course
+@endsection
+
 @section('content')
     <form method="post" action="{{ url('/admin/add-new-course') }}" class="form">
         <h3 style="text-align: center">Add Course</h3>

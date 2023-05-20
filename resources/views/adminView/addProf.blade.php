@@ -1,5 +1,9 @@
 @extends('layouts.adminLayout')
 
+@section('page title')
+    Add Professor
+@endsection
+
 @section('content')
     <form method="post" action="{{ url('/admin/add-new-doctor') }}" class="form">
         <h3 style="text-align: center">Add Professor</h3>
