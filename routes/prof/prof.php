@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\profController\professorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/prof', function () {
-    return "Professor";
-})->middleware('professor');
+Route::group(['middleware' => 'auth', 'professor'], function () {
+
+    Route::prefix('professor')->group(function () {
+        Route::controller(professorController::class)->group(function () {
+            Route::get('/dashboard', 'dashboard');
+            Route::get('/courses', 'coursesPage');
+            Route::get('/students', 'studentsPage');
+            Route::get('/departments', 'department');
+        });
+    });
+
+});

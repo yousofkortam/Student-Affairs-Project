@@ -6,6 +6,8 @@
     use App\Models\Course;
     use App\Models\Lecture;
     use App\Models\Assignment;
+use App\Models\Department;
+use Illuminate\Support\Facades\Auth;
 
 class professorController extends Controller
 {
@@ -79,5 +81,42 @@ class professorController extends Controller
 
         // Return the list of students
         return response()->json(['students' => $course->students]);
+    }
+
+    public function dashboard()
+    {
+        $courses = Auth::user()->professor->courses;
+        return view('professorView.dashboard')->with([
+            'courses' => $courses,
+        ]);
+    }
+
+    public function coursesPage()
+    {
+        $courses = Auth::user()->professor->courses;
+        return view('professorView.courses')->with([
+            'courses' => $courses,
+        ]);
+    }
+
+    public function department()
+    {
+        $departments = Department::all();
+        return view('professorView.departments')->with([
+            'departments' => $departments,
+        ]);
+    }
+
+    public function courseStudents($courseId)
+    {
+        $course = Course::find($courseId);
+        if (!$course) {
+            return redirect('/courses' . '/' . $courseId);
+        }
+        $students = $course->students;
+        return view('professorView.students')->with([
+            'students' => $students,
+            'course_name' => $course->course_name,
+        ]);
     }
 }

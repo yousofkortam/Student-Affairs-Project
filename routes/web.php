@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\profController\professorController;
 use App\Http\Controllers\systemController\systemController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ Route::get('/', function () {
     if ($role == "Admin") {
         return redirect('/admin/dashboard');
     }else if ($role == "Doctor") {
-        return redirect('/doctor/dashboard');
+        return redirect('/professor/dashboard');
     }else if ($role == "Student") {
         return redirect('/student/dashboard');
     }
@@ -35,7 +36,7 @@ Route::get('/login', function () {
         if (Auth::user()->role->role_name == "Admin") {
             return redirect('/admin/dashboard');
         }else if (Auth::user()->role->role_name == "Doctor") {
-            return redirect('/doctor/dashboard');
+            return redirect('/professor/dashboard');
         }else if (Auth::user()->role->role_name == "Student") {
             return redirect('/student/dashboard');
         }
@@ -50,6 +51,6 @@ Route::get('/login', function () {
 Route::get('/courses/{id}', [systemController::class, 'details']);
 Route::get('/courses/{id}/lectures', [systemController::class, 'lectures']);
 Route::get('/courses/{id}/assignments', [systemController::class, 'assignments']);
-
+Route::get('/courses/{id}/students', [professorController::class, 'courseStudents'])->middleware('professor');
 Route::post('/login', [systemController::class, 'login'])->name('login');
 Route::get('/logout', [systemController::class, 'logout'])->name('logout');

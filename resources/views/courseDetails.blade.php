@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="card-inner">
-                <h1>Lectures</h1>
+                <h1 style="color: black">Lectures</h1>
                 <p>Click here to see the lectures.</p>
             </div>
         </a>
@@ -38,10 +38,42 @@
                 </div>
             </div>
             <div class="card-inner">
-                <h1>Assignments</h1>
+                <h1 style="color: black">Assignments</h1>
                 <p>Click here to see the assignments.</p>
             </div>
         </a>
+
+        @if (Auth::user()->role->role_name == "Doctor")
+
+        <div class="card">
+            <div class="card-icon">
+                <div class="card-icon exam">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+            <div class="card-inner">
+                <h1 style="color: black"> <a href="">Add Lecture</a> </h1>
+                <p>Click here to add lecture.</p>
+                <h1 style="color: black"><a href="https://docs.google.com/forms/u/0/?tgif=d" target="_blank">Add Assignment</a></h1>
+                <p>Click here to add assignments.</p>
+            </div>
+        </div>
+
+
+        <a href="/courses/{{$course->id}}/students" class="card">
+            <div class="card-icon">
+                <div class="card-icon pdf">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+            </div>
+            <div class="card-inner">
+                <h1 style="color: black">Students</h1>
+                <p>Click here to see the students registered in this course.</p>
+            </div>
+        </a>
+
+        
+        @endif
 
     </div>
 @endsection
