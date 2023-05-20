@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="/vendors/selectFX/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="/vendors/jqvmap/dist/jqvmap.min.css">
-
+    <link rel="stylesheet" href="/style.css">
 
     <link rel="stylesheet" href="/assets/css/style.css">
 

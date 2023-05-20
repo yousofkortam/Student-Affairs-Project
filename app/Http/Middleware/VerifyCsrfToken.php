@@ -23,6 +23,7 @@ class VerifyCsrfToken extends Middleware
         '/student/canregister/{id}',
         '/admin/student/{id}/edit',
         '/admin/professor/{id}/edit',
+        '/courses/{id}/add-lecture',
         '/login',
     ];
 }

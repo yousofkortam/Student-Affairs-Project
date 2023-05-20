@@ -52,5 +52,16 @@ Route::get('/courses/{id}', [systemController::class, 'details']);
 Route::get('/courses/{id}/lectures', [systemController::class, 'lectures']);
 Route::get('/courses/{id}/assignments', [systemController::class, 'assignments']);
 Route::get('/courses/{id}/students', [professorController::class, 'courseStudents'])->middleware('professor');
+Route::get('/courses/{id}/add-lecture', [professorController::class, 'addLec'])->middleware('professor');
+Route::post('/courses/{id}/add-lecture', [professorController::class, 'addLecture']);
+
+
+
+
+
+
+
+
+
 Route::post('/login', [systemController::class, 'login'])->name('login');
 Route::get('/logout', [systemController::class, 'logout'])->name('logout');

@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="card-inner">
-                <h1 style="color: black"> <a href="">Add Lecture</a> </h1>
+                <h1 style="color: black"> <a href="/courses/{{$course->id}}/add-lecture">Add Lecture</a> </h1>
                 <p>Click here to add lecture.</p>
                 <h1 style="color: black"><a href="https://docs.google.com/forms/u/0/?tgif=d" target="_blank">Add Assignment</a></h1>
                 <p>Click here to add assignments.</p>

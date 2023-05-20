@@ -8,6 +8,7 @@
     use App\Models\Assignment;
 use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class professorController extends Controller
 {
@@ -18,19 +19,24 @@ class professorController extends Controller
 
     public function addLecture(Request $request, $courseId)
     {
-        $request->validate([
+
+        $validatedData = Validator::make($request->all(), [
             'title' => 'required|string',
             'description' => 'required|string',
-            'file_path' => 'required|string',
+            'file_path' => 'required|file',
         ]);
 
-        // Find  course
+        if ($validatedData->fails()) {
+            return redirect('/courses' . '/' . $courseId . '/add-lecture')
+            ->withErrors($validatedData);
+        }
+
+
+        // Find course
         $course = Course::find($courseId);
 
         if (!$course) {
-            return response()->json([
-                'message' => 'course not found'
-            ]);
+            return redirect('/courses' . '/' . $courseId . '/add-lecture');
         }
 
         $file = $request->file('file_path');
@@ -40,7 +46,7 @@ class professorController extends Controller
 
         // Createlecture
         $lecture = new Lecture();
-        $lecture->couse_id = $courseId;
+        $lecture->course_id = $courseId;
         $lecture->title = $request->input('title');
         $lecture->description = $request->input('description');
         $lecture->file_path = $updated_lecture_name;
@@ -48,7 +54,7 @@ class professorController extends Controller
         // Associate the lecture with the course
         $lecture->save();
 
-        return response()->json(['message' => 'Lecture added successfully']);
+        return redirect('/courses' . '/' . $courseId . '/lectures');
     }
 
     public function addAssignment(Request $request, $courseId)
@@ -119,4 +125,12 @@ class professorController extends Controller
             'course_name' => $course->course_name,
         ]);
     }
+
+    public function addLec($id)
+    {
+        return View('professorView.addLecture')->with([
+            'courseId' => $id,
+        ]);
+    }
+
 }
