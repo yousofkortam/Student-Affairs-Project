@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Degree;
 use App\Models\Enrollment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class studentController extends Controller
@@ -37,13 +38,16 @@ class studentController extends Controller
         return false;
     }
 
-    public function courseReg($id)
+    public function courseReg(Request $request, $id)
     {
         $enrollment = Enrollment::create([
             'student_id' => Auth::user()->id,
             'course_id' => $id,
         ]);
-        return response()->json(['message' => 'Course registered successfully', 'enrollment' => $enrollment]);
+        return response()->json([
+            'message' => 'Course registered successfully',
+            'enrollment' => $enrollment
+        ]);
     }
 
 }

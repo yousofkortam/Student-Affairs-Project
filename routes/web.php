@@ -48,6 +48,8 @@ Route::get('/login', function () {
 
 
 Route::get('/courses/{id}', [systemController::class, 'details']);
+Route::get('/courses/{id}/lectures', [systemController::class, 'lectures']);
+Route::get('/courses/{id}/assignments', [systemController::class, 'assignments']);
 
 Route::post('/login', [systemController::class, 'login'])->name('login');
 Route::get('/logout', [systemController::class, 'logout'])->name('logout');

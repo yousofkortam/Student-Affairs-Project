@@ -15,7 +15,7 @@
                 <p>Dr.{{ $course->professor->user->first_name }} {{ $course->professor->user->last_name }}</p>
             </div>
         </div>
-        <a href="lectures.html" class="card">
+        <a href="/courses/{{$course->id}}/lectures" class="card">
             <div class="card-icon">
                 <div class="card-icon pdf">
                     <i class="fas fa-file-pdf"></i>
@@ -27,7 +27,7 @@
             </div>
         </a>
 
-        <a href="assignments.html" class="card">
+        <a href="/courses/{{$course->id}}/assignments" class="card">
             <div class="card-icon">
                 <div class="card-icon exam">
                     <i class="fas fa-book"></i>

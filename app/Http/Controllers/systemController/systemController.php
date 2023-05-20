@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\systemController;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\Degree;
 use App\Models\isCourseRegisterActive;
+use App\Models\Lecture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,6 +62,26 @@ class systemController extends Controller
             'course' => $course,
             'pre' => $pre,
             'degree' => $degree
+        ]);
+    }
+
+    public function lectures($id)
+    {
+        $lectures = Lecture::where('course_id', $id)->get();
+        return View('lectures')->with([
+            'lectures' => $lectures,
+            'course id' => $id,
+        ]);
+    }
+
+    public function assignments(Request $request, $id)
+    {
+        $assignments = Assignment::where('course_id', $id)->get();
+        return response()->json([
+            'assignments' => $assignments
+        ]);
+        return View('assignment')->with([
+            'assignments' => $assignments,
         ]);
     }
 
