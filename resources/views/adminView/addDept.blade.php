@@ -1,5 +1,9 @@
 @extends('layouts.adminLayout')
 
+@section('page title')
+    Add Department
+@endsection
+
 @section('content')
     <form method="POST" action="{{ url('/admin/add-dept') }}" class="form">
 

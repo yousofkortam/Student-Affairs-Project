@@ -49,6 +49,8 @@ class studentController extends Controller
         $enrollment->save();
 
         // Return a response indicating success
-        return response()->json(['message' => 'Course enrolled successfully']);
+        return response()->json([
+            'message' => 'Course enrolled successfully'
+        ]);
     }
 }

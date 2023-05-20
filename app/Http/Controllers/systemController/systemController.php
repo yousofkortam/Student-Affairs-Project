@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Auth;
 
 class systemController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('login');
+    }
+
     public function login(Request $request)
     {
 
@@ -48,6 +54,19 @@ class systemController extends Controller
 
     public function details($courseId)
     {
+        if (Auth::user()->role->role_name == "Student") {
+            $courses = Auth::user()->student->courses;
+            if (!$courses->find($courseId)) {
+                return redirect('/student/dashboard');
+            }
+        }
+
+        if (Auth::user()->role->role_name == "Doctor") {
+            $courses = Auth::user()->professor->courses;
+            if (!$courses->find($courseId)) {
+                return redirect('/professor/dashboard');
+            }
+        }
         $course = Course::find($courseId);
         $pre = $course->prerequisites;
         $degree = Degree::where('student_id', Auth::user()->id)->where('course_id', $courseId)->get();
@@ -61,6 +80,19 @@ class systemController extends Controller
 
     public function lectures($id)
     {
+        if (Auth::user()->role->role_name == "Student") {
+            $courses = Auth::user()->student->courses;
+            if (!$courses->find($id)) {
+                return redirect('/student/dashboard');
+            }
+        }
+
+        if (Auth::user()->role->role_name == "Doctor") {
+            $courses = Auth::user()->professor->courses;
+            if (!$courses->find($id)) {
+                return redirect('/professor/dashboard');
+            }
+        }
         $lectures = Lecture::where('course_id', $id)->get();
         return View('lectures')->with([
             'lectures' => $lectures,
@@ -70,10 +102,22 @@ class systemController extends Controller
 
     public function assignments(Request $request, $id)
     {
+        if (Auth::user()->role->role_name == "Student") {
+            $courses = Auth::user()->student->courses;
+            if (!$courses->find($id)) {
+                return redirect('/student/dashboard');
+            }
+        }
+
+        if (Auth::user()->role->role_name == "Doctor") {
+            $courses = Auth::user()->professor->courses;
+            if (!$courses->find($id)) {
+                return redirect('/professor/dashboard');
+            }
+        }
+
         $assignments = Assignment::where('course_id', $id)->get();
-        return response()->json([
-            'assignments' => $assignments
-        ]);
+
         return View('assignment')->with([
             'assignments' => $assignments,
         ]);

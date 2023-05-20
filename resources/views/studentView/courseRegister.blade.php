@@ -1,5 +1,9 @@
 @extends('layouts.studentLayout')
 
+@section('page title')
+    Course Register
+@endsection
+
 @section('styles')
     <link rel="stylesheet" href="/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />

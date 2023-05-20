@@ -1,5 +1,9 @@
 @extends('layouts.adminLayout')
 
+@section('page title')
+    Update professor
+@endsection
+
 @section('content')
     <form method="post" action="/admin/professor/{{$user->id}}/edit" class="form">
         @csrf

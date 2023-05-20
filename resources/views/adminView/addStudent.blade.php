@@ -1,5 +1,9 @@
 @extends('layouts.adminLayout')
 
+@section('page title')
+    Add Student
+@endsection
+
 @section('content')
     <form id="AddStudentForm" method="POST" action="{{ url('/admin/add-new-student') }}" class="form">
         @csrf

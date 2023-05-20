@@ -1,5 +1,9 @@
 @extends('layouts.adminLayout')
 
+@section('page title')
+    Admin Dashboard
+@endsection
+
 @section('content')
 <div class="content mt-3">
 
