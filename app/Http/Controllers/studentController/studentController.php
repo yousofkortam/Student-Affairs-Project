@@ -38,16 +38,17 @@ class studentController extends Controller
         return false;
     }
 
-    public function courseReg(Request $request, $id)
+    public function courseReg(Request $request)
     {
-        $enrollment = Enrollment::create([
-            'student_id' => Auth::user()->id,
-            'course_id' => $id,
-        ]);
-        return response()->json([
-            'message' => 'Course registered successfully',
-            'enrollment' => $enrollment
-        ]);
-    }
+        $courseId = $request->input('courseId');
 
+        $enrollment = new Enrollment();
+        $enrollment->course_id = $courseId;
+        $enrollment->student_id = Auth::user()->id;
+
+        $enrollment->save();
+
+        // Return a response indicating success
+        return response()->json(['message' => 'Course enrolled successfully']);
+    }
 }

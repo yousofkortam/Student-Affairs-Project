@@ -51,12 +51,6 @@ class systemController extends Controller
         $course = Course::find($courseId);
         $pre = $course->prerequisites;
         $degree = Degree::where('student_id', Auth::user()->id)->where('course_id', $courseId)->get();
-        // return response()->json([
-        //     'user_id' => Auth::user()->id,
-        //     'course' => $course,
-        //     'pre' => $pre,
-        //     'degree' => $degree
-        // ]);
         return View('courseDetails')->with([
             'user_id' => Auth::user()->id,
             'course' => $course,

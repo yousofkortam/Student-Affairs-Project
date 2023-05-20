@@ -77,10 +77,9 @@ class adminController extends Controller
         ]);
 
         if ($validatedData->fails()) {
-            return response()->json([
-                'message' => 'Validation error',
-                'errors' => $validatedData->errors(),
-            ], 422);
+            return redirect('/admin/add-course')
+            ->withErrors($validatedData)
+            ->withInput();
         }
 
         $course = new Course();
@@ -146,10 +145,9 @@ class adminController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation error',
-                'errors' => $validator->errors(),
-            ], 422);
+            return redirect('/admin/add-student')
+            ->withErrors($validator)
+            ->withInput();
         }
 
         $role = Role::where('role_name', 'Student')->first();
@@ -214,10 +212,9 @@ class adminController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation error',
-                'error' => $validator->errors()
-            ]);
+            return redirect('/admin/student/' . $id . '/edit')
+            ->withErrors($validator)
+            ->withInput();
         }
 
         $user->first_name = $request->input('first_name');
@@ -251,10 +248,9 @@ class adminController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation error',
-                'errors' => $validator->errors(),
-            ], 422);
+            return redirect('/admin/add-professor')
+            ->withErrors($validator)
+            ->withInput();
         }
 
         $role = Role::where('role_name', 'Doctor')->first();
@@ -344,10 +340,9 @@ class adminController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation error',
-                'errors' => $validator->errors(),
-            ], 422);
+            return redirect('/admin/add-admin')
+            ->withErrors($validator)
+            ->withInput();
         }
 
         $role = Role::where('role_name', 'Admin')->first();
