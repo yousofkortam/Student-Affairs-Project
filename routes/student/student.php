@@ -30,7 +30,8 @@ Route::group(['middleware' => 'auth', 'student'], function () {
     Route::prefix('student')->group(function () {
         Route::controller(studentController::class)->group(function () {
             Route::get('/canregister/{id}', 'checkIfStudentCanRegisterThisCourse');
-            Route::post('/register/{id}', 'courseReg');
+            Route::post('/register', 'courseReg');
+            Route::post('/delete-register', 'deleteRegisteredCourse');
         });
     });
 

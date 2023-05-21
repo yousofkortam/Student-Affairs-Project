@@ -44,13 +44,36 @@ class studentController extends Controller
 
         $enrollment = new Enrollment();
         $enrollment->course_id = $courseId;
-        $enrollment->student_id = Auth::user()->id;
+        $enrollment->student_id = Auth::user()->student->id;
 
         $enrollment->save();
 
         // Return a response indicating success
         return response()->json([
-            'message' => 'Course enrolled successfully'
+            'message' => 'Course enrolled successfully',
+            'id' => $courseId
         ]);
+    }
+
+    public function deleteRegisteredCourse(Request $request)
+    {
+        $courseId = $request->input('courseId');
+
+        $enrollment = Enrollment::where('course_id', $courseId)
+            ->where('student_id', Auth::user()->student->id)
+            ->first();
+
+        if ($enrollment) {
+            $enrollment->delete();
+            return response()->json([
+                'message' => 'Enrollment deleted successfully',
+                'id' => $courseId
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Enrollment not found',
+            'id' => $courseId
+        ], 404);
     }
 }

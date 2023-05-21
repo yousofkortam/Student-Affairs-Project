@@ -4,6 +4,7 @@ namespace App\Http\Controllers\studentController;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Enrollment;
 use Illuminate\Support\Facades\Auth;
 
 class studentPagesController extends Controller
@@ -24,16 +25,24 @@ class studentPagesController extends Controller
     {
         $courses = Course::all();
         $validatedCourses = array();
-        foreach($courses as $course) 
-        {
+        $actives = array();
+        foreach ($courses as $course) {
             $st = new studentController();
             if ($st->checkIfStudentCanRegisterThisCourse($course->id)) {
                 $validatedCourses[] = $course;
+                $enrollment = Enrollment::where('course_id', $course->id)
+                    ->where('student_id', Auth::user()->student->id)
+                    ->first();
+                if ($enrollment) { // true
+                    $actives[] = true;
+                }else { // false
+                    $actives[] = false;
+                }
             }
         }
         return View('studentView.courseRegister')->with([
             'courses' => $validatedCourses,
+            'actives' => $actives,
         ]);
     }
-    
 }
