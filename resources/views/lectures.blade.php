@@ -21,10 +21,12 @@ Lectures
                 <i class="fas fa-file-pdf"></i>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ $lecture->title }}</h5>
                 <div style="display: flex; justify-content:space-between;">
-                    <p class="card-text">{{ $lecture->description }}</p>
-                    <button type="button" class="btn btn-primary">
+                    <div>
+                        <h5 class="card-title">{{ $lecture->title }}</h5>
+                        <p class="card-text">{{ $lecture->description }}</p>
+                    </div>
+                    <button onclick="alert('Done download')" type="button" class="btn btn-primary">
                         <div class="download-icon">
                             <i class="fas fa-download"></i>
                         </div>
