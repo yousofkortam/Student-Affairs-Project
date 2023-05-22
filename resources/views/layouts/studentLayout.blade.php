@@ -30,7 +30,7 @@
 <body>
 
 
-    
+
 
     <!-- Right Panel -->
 
@@ -42,7 +42,9 @@
             <div class="header-menu">
 
                 <div class="col-sm-7">
-                    <a href="/" style="color: black"><h4>FCI Menufia University</h4></a>
+                    <a href="/" style="color: black">
+                        <h4>FCI Menufia University</h4>
+                    </a>
                 </div>
 
                 <div class="col-sm-5">
@@ -52,9 +54,7 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            @if (session()->get('courseActive') == 1 && Auth::user()->role->role_name == "Student")
-                                <a class="nav-link" href="/student/register"><i class="fa fa-power-off"></i> Course Register</a>
-                            @endif
+                            <a class="nav-link" href="/student/register"><i class="fa fa-power-off"></i> Course Register</a>
                             <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
         </header><!-- /header -->
         <!-- Header-->
 
-        
+
         @yield('content')
 
     </div><!-- /#right-panel -->
