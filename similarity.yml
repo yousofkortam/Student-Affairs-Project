@@ -1,2 +1,0 @@
-- name: Duplicate code detection tool
-  uses: platisd/duplicate-code-detection-tool@1.1.0
