@@ -13,7 +13,7 @@
                 <a href="/courses/{{ $course->id }}">
                     <div class="card" style="
                     border: 1px solid #ccc;
-                    overflow: hidden;
+                    overflow: hidden; 
                     white-space: nowrap;">
                         <div class="card-body">
                             <div class="stat-widget-four">
