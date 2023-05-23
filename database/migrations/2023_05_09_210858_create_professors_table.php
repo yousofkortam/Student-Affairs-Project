@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('department_id');
             $table->date('hire_date');
-            $table->string('qualification');
-            $table->string('research_interests');
+            $table->string('qualification')->nullable();
+            $table->string('research_interests')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

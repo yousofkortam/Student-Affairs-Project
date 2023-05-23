@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\isCourseRegisterActive;
 use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
@@ -30,6 +31,10 @@ class UsersTableSeeder extends Seeder
             'role_name' => 'Student',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
+        ]);
+
+        $courseActive = isCourseRegisterActive::create([
+            'isActive' => 1,
         ]);
 
         // Create the admin user
