@@ -47,7 +47,7 @@ class studentPagesController extends Controller
                     ->first();
                 if ($enrollment) { // true
                     $actives[] = true;
-                }else { // false
+                } else { // false
                     $actives[] = false;
                 }
             }
