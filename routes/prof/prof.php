@@ -22,6 +22,8 @@ Route::group(['middleware' => 'auth', 'professor'], function () {
             Route::get('/courses', 'coursesPage');
             Route::get('/students', 'studentsPage');
             Route::get('/departments', 'department');
+            Route::post('/courses/student/mark', 'addMark');
+            Route::post('/courses/student/edit-mark', 'editMark');
         });
     });
 

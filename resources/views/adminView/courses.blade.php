@@ -5,15 +5,13 @@
 @endsection
 
 @section('content')
-    <div class="col-sm-7">
+    <div class="col-sm-7 ml-4">
+        <button class="btn btn-primary" onclick="@if($register == 0)activeCourses()@else deActiveCourses()@endif" type="submit">
+            @if ($register == 0)Active register @else Deactive register @endif
+        </button>
         <a href="/admin/add-course">Add Course</a>
     </div>
     <div class="content mt-3">
-
-
-
-
-
 
         @foreach ($courses as $course)
             <div class="col-lg-3 col-md-6">
@@ -54,4 +52,94 @@
 
 
     </div> <!-- .content -->
+@endsection
+
+@section('scripts')
+<script>
+    function activeCourses()
+    {
+        var id = 1;
+
+            $.ajax({
+                url: '/admin/active-courses-register',
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    // Show a pop-up message with the response
+                    alert(response.message);
+                    location.reload();
+                },
+                error: function(xhr) {
+                    // Show a pop-up message with the error
+                    alert('Error: ' + xhr.responseText);
+                }
+            });
+    }
+    function deActiveCourses()
+    {
+        var id = 1;
+
+            $.ajax({
+                url: '/admin/deactive-courses-register',
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    // Show a pop-up message with the response
+                    alert(response.message);
+                    location.reload();
+                },
+                error: function(xhr) {
+                    // Show a pop-up message with the error
+                    alert('Error: ' + xhr.responseText);
+                }
+            });
+    }
+    // $(document).ready(function() {
+    //     $('#ActiveButtton').click(function() {
+    //         var id = 1;
+
+    //         $.ajax({
+    //             url: '/admin/active-courses-register',
+    //             type: 'POST',
+    //             data: {
+    //                 id: id
+    //             },
+    //             success: function(response) {
+    //                 // Show a pop-up message with the response
+    //                 alert(response.message);
+    //                 location.reload();
+    //             },
+    //             error: function(xhr) {
+    //                 // Show a pop-up message with the error
+    //                 alert('Error: ' + xhr.responseText);
+    //             }
+    //         });
+    //     });
+
+    //     $('#DeactiveButtton').click(function() {
+    //         var id = 1;
+
+    //         $.ajax({
+    //             url: '/admin/deactive-courses-register',
+    //             type: 'POST',
+    //             data: {
+    //                 id: id
+    //             },
+    //             success: function(response) {
+    //                 // Show a pop-up message with the response
+    //                 alert(response.message);
+    //                 location.reload();
+    //             },
+    //             error: function(xhr) {
+    //                 // Show a pop-up message with the error
+    //                 alert('Error: ' + xhr.responseText);
+    //             }
+    //         });
+    //     });
+    // });
+</script>
 @endsection

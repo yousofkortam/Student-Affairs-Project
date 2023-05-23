@@ -25,16 +25,18 @@ class adminController extends Controller
     {
         isCourseRegisterActive::where('id', 1)
             ->update(['isActive' => 1]);
-        session()->put('courseActive', 1);
-        return response()->json(['message' => 'Course registration is active now']);
+        return response()->json([
+            'message' => 'Course registration is active now'
+        ]);
     }
-
+    // Done 😎
     public function deactiveCourses()
     {
         isCourseRegisterActive::where('id', 1)
             ->update(['isActive' => 0]);
-        session()->put('courseActive', 0);
-        return response()->json(['message' => 'Course registration is not active now']);
+        return response()->json([
+            'message' => 'Course registration is not active now'
+        ]);
     }
 
     public function addDepartment(Request $request)

@@ -1,11 +1,13 @@
 <?php
 
-    namespace App\Http\Controllers\profController;
-    use App\Http\Controllers\Controller;
-    use Illuminate\Http\Request;
-    use App\Models\Course;
-    use App\Models\Lecture;
-    use App\Models\Assignment;
+namespace App\Http\Controllers\profController;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Course;
+use App\Models\Lecture;
+use App\Models\Assignment;
+use App\Models\Degree;
 use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +30,7 @@ class professorController extends Controller
 
         if ($validatedData->fails()) {
             return redirect('/courses' . '/' . $courseId . '/add-lecture')
-            ->withErrors($validatedData);
+                ->withErrors($validatedData);
         }
 
 
@@ -50,7 +52,7 @@ class professorController extends Controller
         $lecture->title = $request->input('title');
         $lecture->description = $request->input('description');
         $lecture->file_path = $updated_lecture_name;
-        
+
         // Associate the lecture with the course
         $lecture->save();
 
@@ -73,7 +75,7 @@ class professorController extends Controller
         $assignment = new Assignment();
         $assignment->title = $request->input('title');
         $assignment->description = $request->input('description');
-        
+
         // Associate the assignment with the course
         $course->assignments()->save($assignment);
 
@@ -122,9 +124,68 @@ class professorController extends Controller
         $students = $course->students;
         return view('professorView.students')->with([
             'students' => $students,
-            'course_name' => $course->course_name,
+            'course' => $course,
         ]);
     }
+
+    public function addMark(Request $request)
+    {
+        $courseId = $request->input('courseID');
+        $studentId = $request->input('studentID');
+        $mark = $request->input('degree');
+
+        try {
+            $degree = Degree::where('student_id', $studentId)->where('course_id', $courseId)->first();
+            if ($degree) {
+                return response()->json([
+                    'message' => 'Student mark already exists',
+                ], 404);
+            }
+
+            $Degree = new Degree();
+            $Degree->course_id = $courseId;
+            $Degree->student_id = $studentId;
+            $Degree->degree = $mark;
+            $Degree->save();
+
+            return response()->json([
+                'message' => 'Mark added successfully',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'An error occurred while adding the mark.',
+            ], 500);
+        }
+    }
+
+    public function editMark(Request $request)
+    {
+        $courseId = $request->input('courseID');
+        $studentId = $request->input('studentID');
+        $mark = $request->input('degree');
+
+        try {
+            $degree = Degree::where('student_id', $studentId)->where('course_id', $courseId)->first();
+            if (!$degree) {
+                return response()->json([
+                    'message' => 'Please add mark first',
+                ], 404);
+            }
+
+            $degree->degree = $mark;
+
+            $degree->save();
+
+            return response()->json([
+                'message' => 'Mark edited successfully',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'An error occurred while editing the mark.',
+            ], 500);
+        }
+    }
+
 
     public function addLec($id)
     {
@@ -132,5 +193,4 @@ class professorController extends Controller
             'courseId' => $id,
         ]);
     }
-
 }

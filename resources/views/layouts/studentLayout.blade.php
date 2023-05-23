@@ -54,7 +54,7 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="/student/register"><i class="fa fa-power-off"></i> Course Register</a>
+                            <a class="nav-link" href="/student/register"><i class="fa fa-graduation-cap"></i> Course Register</a>
                             <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>

@@ -47,6 +47,8 @@ Route::get('/login', function () {
     ]);
 });
 
+Route::get('/lecture/view/{lec_name}', [systemController::class, 'viewLecture']);
+
 
 Route::get('/courses/{id}', [systemController::class, 'details']);
 Route::get('/courses/{id}/lectures', [systemController::class, 'lectures']);

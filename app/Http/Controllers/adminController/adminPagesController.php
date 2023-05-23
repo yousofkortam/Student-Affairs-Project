@@ -5,11 +5,11 @@ namespace App\Http\Controllers\adminController;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Department;
+use App\Models\isCourseRegisterActive;
 use App\Models\Professor;
 use App\Models\Role;
 use App\Models\Student;
 use App\Models\User;
-use Illuminate\View\View;
 
 class adminPagesController extends Controller
 {
@@ -25,11 +25,13 @@ class adminPagesController extends Controller
         $professors = Professor::all();
         $students = Student::all();
         $roles = Role::all();
+        $isActive = isCourseRegisterActive::where('id', 1)->first();
         $data = [
             'courses' => $courses,
             'professors' => $professors,
             'students' => $students,
-            'roles' => $roles
+            'roles' => $roles,
+            'register' => $isActive->isActive,
         ];
         return View('adminView.dashboard')->with('data', $data);
     }
@@ -37,7 +39,11 @@ class adminPagesController extends Controller
     public function coursesPage()
     {
         $courses = Course::all();
-        return View('adminView.courses')->with('courses', $courses);
+        $isActive = isCourseRegisterActive::where('id', 1)->first();
+        return View('adminView.courses')->with([
+            'courses' => $courses,
+            'register' => $isActive->isActive,
+        ]);
     }
 
     public function adminsPage()

@@ -99,11 +99,7 @@
             <div class="header-menu">
 
                 <div class="col-sm-7">
-                    @if (session()->get('courseActive') == 0)
-                        <a id="ActiveButtton" type="submit">active registration</a>
-                    @else
-                        <a id="DeactiveButtton" type="submit">deactive registration</a>
-                    @endif
+
                 </div>
 
                 <div class="col-sm-5">
@@ -150,6 +146,8 @@
         })(jQuery);
     </script>
 
+    @yield('scripts')
+
     <script src="/vendors/jquery/dist/jquery.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
@@ -175,50 +173,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"
         integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#ActiveButtton').click(function() {
-                var id = 1;
-
-                $.ajax({
-                    url: '/admin/active-courses-register',
-                    type: 'POST',
-                    data: {
-                        id: id
-                    },
-                    success: function(response) {
-                        // Show a pop-up message with the response
-                        alert(response.message);
-                    },
-                    error: function(xhr) {
-                        // Show a pop-up message with the error
-                        alert('Error: ' + xhr.responseText);
-                    }
-                });
-            });
-
-            $('#DeactiveButtton').click(function() {
-                var id = 1;
-
-                $.ajax({
-                    url: '/admin/deactive-courses-register',
-                    type: 'POST',
-                    data: {
-                        id: id
-                    },
-                    success: function(response) {
-                        // Show a pop-up message with the response
-                        alert(response.message);
-                    },
-                    error: function(xhr) {
-                        // Show a pop-up message with the error
-                        alert('Error: ' + xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
 
 </body>
 

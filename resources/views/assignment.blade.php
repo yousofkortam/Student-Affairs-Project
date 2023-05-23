@@ -12,19 +12,23 @@
 @section('content')
     <div class="container">
 
-        @foreach ($assignments as $assignment)
-            <a href="link_for_lectures" class="card-link" target="_blank">
-                <div class="card">
-                    <div class="card-icon">
-                        <i class="fas fa-link"></i>
+        @if (count($assignments) > 0)
+            @foreach ($assignments as $assignment)
+                <a href="link_for_lectures" class="card-link" target="_blank">
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $assignment->title }}</h5>
+                            <p class="card-text">{{ $assignment->description }}</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $assignment->title }}</h5>
-                        <p class="card-text">{{ $assignment->description }}</p>
-                    </div>
-                </div>
-            </a>
-        @endforeach
+                </a>
+            @endforeach
+        @else
+        <h1>There are no assignments for this course</h1>
+        @endif
 
     </div>
 @endsection

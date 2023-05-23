@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\Degree;
-use App\Models\isCourseRegisterActive;
 use App\Models\Lecture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,8 +25,6 @@ class systemController extends Controller
 
         if (Auth::attempt($credentials)) {
             $role = Auth::user()->role->role_name;
-            $isActive = isCourseRegisterActive::where('isActive', 1)->first();
-            session()->put('courseActive', $isActive != null? 1 : 0);
             if ($role == "Admin") {
                 return response()->json([
                     'message' => 'Login successful',
@@ -36,12 +33,12 @@ class systemController extends Controller
             }else if ($role == "Doctor") {
                 return response()->json([
                     'message' => 'Login successful',
-                    'redirect' => '/professor/dashboard'
+                    'redirect' => '/professor/dashboard',
                 ]);
             }else if ($role == "Student") {
                 return response()->json([
                     'message' => 'Login successful',
-                    'redirect' => '/student/dashboard'
+                    'redirect' => '/student/dashboard',
                 ]);
             }
         }
@@ -100,7 +97,7 @@ class systemController extends Controller
         ]);
     }
 
-    public function assignments(Request $request, $id)
+    public function assignments($id)
     {
         if (Auth::user()->role->role_name == "Student") {
             $courses = Auth::user()->student->courses;
@@ -120,6 +117,13 @@ class systemController extends Controller
 
         return View('assignment')->with([
             'assignments' => $assignments,
+        ]);
+    }
+
+    public function viewLecture($lec_name)
+    {
+        return view('lectureView')->with([
+            'lec_name' => $lec_name,
         ]);
     }
 

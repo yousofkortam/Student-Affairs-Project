@@ -1,6 +1,5 @@
 @extends('layouts.studentLayout')
 
-
 @section('page title')
     {{$course->course_name}} | Details
 @endsection

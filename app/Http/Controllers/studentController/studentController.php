@@ -26,7 +26,7 @@ class studentController extends Controller
 
         $prerequisiteIds = $course->prerequisites->pluck('id');
 
-        $passedPrerequisites = Degree::where('student_id', Auth::user()->id)
+        $passedPrerequisites = Degree::where('student_id', Auth::user()->student->id)
             ->whereIn('course_id', $prerequisiteIds)
             ->where('degree', '>=', 50.00)
             ->count();

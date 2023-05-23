@@ -5,6 +5,7 @@ namespace App\Http\Controllers\studentController;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Enrollment;
+use App\Models\isCourseRegisterActive;
 use Illuminate\Support\Facades\Auth;
 
 class studentPagesController extends Controller
@@ -23,6 +24,17 @@ class studentPagesController extends Controller
 
     public function courseRegister()
     {
+
+        $Active = isCourseRegisterActive::where('id', 1)->first();
+        // return response()->json(
+        //     [
+        //         'message' => $Active
+        //     ]
+        // );
+        if ($Active->isActive == 0) {
+            return redirect('/student/dashboard');
+        }
+
         $courses = Course::all();
         $validatedCourses = array();
         $actives = array();
