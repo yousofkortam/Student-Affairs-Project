@@ -54,7 +54,7 @@
                                             </td>
                                             <td>
                                                 <button style="border: none; cursor:pointer"
-                                                    onclick="alert('edit button')"
+                                                    onclick="mark('{{$course->id}}', '{{$student->id}}')"
                                                     class="text text-success"
                                                     @if ($done) disabled @endif>Mark</button>
                                                     |
